@@ -1,0 +1,30 @@
+.GirlName {
+    background-color: #fffdd0;
+    color: 	#DC143C;
+    border-radius: 12px;
+    font-size: 20px;
+    padding: 32px 20px;
+    font-family: Georgia, serif
+}
+
+.BoyName {
+    background-color: #4CAF50;
+    color: rgb(0, 0, 0);
+    border-radius: 12px;
+    font-size: 20px;
+    padding: 32px 20px;
+    font-family: lucida, monospace;
+}
+
+.buttonBlock {
+    display:block;
+    /*box-shadow: 20px 20px 50px 15px rgb(0, 0, 0);*/
+    border: 10px solid #000000;
+    width:90%;
+    height: auto;
+    padding: 10px;
+    background-color: rgba(209, 184, 116, 0.7);
+    margin: 10px auto;
+    border-radius: 10px;
+    text-align: center
+}
