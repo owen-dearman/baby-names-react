@@ -8,26 +8,9 @@ interface namesInterface {
 }
 
 export function MainContent(): JSX.Element {
-  //const [nameList, setNameList] = useState<namesInterface[]>([])
+  const sortedNameData = nameData.sort((a, b) => a.name.localeCompare(b.name));
   const [fav, setFav] = useState<namesInterface[]>([]);
-  const [names, setNames] = useState<namesInterface[]>(nameData);
-
-  const ButtonBuilder = (props: namesInterface): JSX.Element => {
-    const addtoFav = () => {
-      setFav([...fav, props]);
-    };
-    return (
-      <li onClick={addtoFav} className={props.sex} key={props.id}>
-        {" "}
-        {props.name}{" "}
-      </li>
-    );
-  };
-
-  //for the name data, sort the objects into alphabetical order and then create list items out of them
-  const namebuttons = nameData
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .map(ButtonBuilder);
+  const [names] = useState<namesInterface[]>(sortedNameData);
 
   return (
     <>
@@ -71,8 +54,6 @@ export function MainContent(): JSX.Element {
 
 /*
 Make a search bar
-Delete buttons when in favourites
-Delete favourites when in main
 Deploy to netflify
 
 */
