@@ -8,42 +8,56 @@ interface namesInterface {
 }
 
 export function MainContent(): JSX.Element {
+  //Sort the names in alphabetical order
   const sortedNameData = nameData.sort((a, b) => a.name.localeCompare(b.name));
+  //useState functions
   const [fav, setFav] = useState<namesInterface[]>([]);
-  const [names] = useState<namesInterface[]>(sortedNameData);
+  const [names, setNames] = useState<namesInterface[]>(sortedNameData);
 
   return (
     <>
       <div className="buttonBlock">
-        <input />
+        <input
+          placeholder="Search Names"
+          onChange={(e) =>
+            setNames(
+              sortedNameData.filter(
+                (individualName) =>
+                  individualName.name
+                    .toLowerCase()
+                    .indexOf(e.target.value.toLowerCase()) === 0
+              )
+            )
+          }
+        />
       </div>
       <div className="buttonBlock">
         <h2>Favourite Names: </h2>
-        {fav.map((x) => (
+        {fav.map((names) => (
           <li
-            className={x.sex}
-            key={x.id}
+            className={names.sex}
+            key={names.id}
             onClick={() => {
-              setFav(fav.filter((y) => y !== x));
+              setFav(fav.filter((readNamesAgain) => readNamesAgain !== names));
             }}
           >
-            {x.name}
+            {names.name}
           </li>
         ))}
       </div>
       <div className="buttonBlock">
         <ul>
           {names
-            .filter((x) => !fav.includes(x))
-            .map((x) => (
+            .filter((names) => !fav.includes(names))
+            .map((names) => (
               <li
-                className={x.sex}
-                key={x.id}
+                className={names.sex}
+                key={names.id}
                 onClick={() => {
-                  setFav([...fav, x]);
+                  setFav([...fav, names]);
                 }}
               >
-                {x.name}
+                {names.name}
               </li>
             ))}
         </ul>
@@ -54,6 +68,5 @@ export function MainContent(): JSX.Element {
 
 /*
 Make a search bar
-Deploy to netflify
-
+Make buttons for gender
 */
