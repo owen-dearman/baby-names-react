@@ -17,6 +17,7 @@ export function MainContent(): JSX.Element {
   const [names, setNames] = useState<namesInterface[]>(sortedNameData);
   const [filterNames, setFilterNames] =
     useState<namesInterface[]>(sortedNameData);
+  const [text, setText] = useState("");
 
   const maleFilter = () => {
     setNames(maleNamesOnly);
@@ -33,10 +34,16 @@ export function MainContent(): JSX.Element {
     setFilterNames(sortedNameData);
   };
 
+  function clearSearch() {
+    setText("");
+    setNames(sortedNameData);
+  }
+
   return (
     <>
       <div className="buttonBlock">
         <input
+          value={text}
           placeholder="Search Names"
           onChange={(e) =>
             setNames(
@@ -51,6 +58,7 @@ export function MainContent(): JSX.Element {
             )
           }
         />
+        <button onClick={clearSearch}>Clear Input</button>
         <button onClick={maleFilter}>Male</button>
         <button onClick={femaleFilter}>Female</button>
         <button onClick={allFilter}>Any</button>
