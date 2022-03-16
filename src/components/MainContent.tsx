@@ -10,9 +10,27 @@ interface namesInterface {
 export function MainContent(): JSX.Element {
   //Sort the names in alphabetical order
   const sortedNameData = nameData.sort((a, b) => a.name.localeCompare(b.name));
-  //useState functions
+  const maleNamesOnly = sortedNameData.filter((x) => x.sex === "m")
+  const femaleNamesOnly = sortedNameData.filter((x) => x.sex === "f")
+     //useState functions
   const [fav, setFav] = useState<namesInterface[]>([]);
   const [names, setNames] = useState<namesInterface[]>(sortedNameData);
+  const [filterNames, setFilterNames] = useState<namesInterface[]>(sortedNameData)
+
+  const maleFilter = () => {
+    setNames(maleNamesOnly)
+    setFilterNames(maleNamesOnly)
+  }
+
+  const femaleFilter = () => {
+    setNames(femaleNamesOnly)
+    setFilterNames(femaleNamesOnly)
+  }
+
+  const allFilter = () => {
+    setNames(sortedNameData)
+    setFilterNames(sortedNameData)
+  }
 
   return (
     <>
@@ -21,15 +39,22 @@ export function MainContent(): JSX.Element {
           placeholder="Search Names"
           onChange={(e) =>
             setNames(
-              sortedNameData.filter(
+              //filter the names to those that match the input
+               filterNames.filter(
                 (individualName) =>
                   individualName.name
                     .toLowerCase()
+                    //if text matches input then gives index of 0
                     .indexOf(e.target.value.toLowerCase()) === 0
               )
+              
             )
           }
+
         />
+        <button onClick={maleFilter}>Male</button>
+        <button onClick={femaleFilter}>Female</button>
+        <button onClick={allFilter}>Any</button>
       </div>
       <div className="buttonBlock">
         <h2>Favourite Names: </h2>
@@ -38,6 +63,7 @@ export function MainContent(): JSX.Element {
             className={names.sex}
             key={names.id}
             onClick={() => {
+              // removes names from favourites array when clicked 
               setFav(fav.filter((readNamesAgain) => readNamesAgain !== names));
             }}
           >
@@ -48,6 +74,7 @@ export function MainContent(): JSX.Element {
       <div className="buttonBlock">
         <ul>
           {names
+          //only show names not in the favourite section
             .filter((names) => !fav.includes(names))
             .map((names) => (
               <li
@@ -67,6 +94,5 @@ export function MainContent(): JSX.Element {
 }
 
 /*
-Make a search bar
 Make buttons for gender
 */

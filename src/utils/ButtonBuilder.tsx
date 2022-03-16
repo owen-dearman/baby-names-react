@@ -23,8 +23,7 @@ const ButtonBuilder = (
 ): JSX.Element => {
   return props.sex === "f" ? (
     <li onClick={onClick} className="GirlName" key={props.id}>
-      {" "}
-      {props.name}{" "}
+      {props.name}
     </li>
   ) : (
     <li onClick={onClick} className="BoyName" key={props.id}>
