@@ -36,7 +36,7 @@ export function MainContent(): JSX.Element {
 
   function clearSearch() {
     setText("");
-    setNames(sortedNameData);
+    setNames(filterNames);
   }
 
   return (
@@ -45,7 +45,7 @@ export function MainContent(): JSX.Element {
         <input
           value={text}
           placeholder="Search Names"
-          onChange={(e) =>
+          onChange={(e) => {
             setNames(
               //filter the names to those that match the input
               filterNames.filter(
@@ -55,8 +55,9 @@ export function MainContent(): JSX.Element {
                     //if text matches input then gives index of 0
                     .indexOf(e.target.value.toLowerCase()) === 0
               )
-            )
-          }
+            );
+            setText(e.target.value);
+          }}
         />
         <button onClick={clearSearch}>Clear Input</button>
         <button onClick={maleFilter}>Male</button>
